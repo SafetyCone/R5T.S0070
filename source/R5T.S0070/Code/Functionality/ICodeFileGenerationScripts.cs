@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 
 using R5T.T0132;
+using R5T.T0161.Extensions;
 
 
 namespace R5T.S0070
@@ -44,11 +45,13 @@ namespace R5T.S0070
         {
             /// Inputs.
             var razorFilePath = Instances.Paths.Sample_RazorFilePath;
+            var namespaceName = "Sample".ToNamespaceName();
 
 
             /// Run.
             await Instances.CodeFileGenerationOperations.Create_IndexRazorFile_WebBlazorClient(
-                razorFilePath);
+                razorFilePath,
+                namespaceName);
 
             Instances.NotepadPlusPlusOperator.Open(
                 razorFilePath.Value);
