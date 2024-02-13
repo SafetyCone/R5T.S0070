@@ -1,6 +1,6 @@
 using System;
 using System.Threading.Tasks;
-
+using R5T.L0073.F001;
 using R5T.T0132;
 using R5T.T0161.Extensions;
 
@@ -13,6 +13,92 @@ namespace R5T.S0070
     [FunctionalityMarker]
     public partial interface ICodeFileGenerationScripts : IFunctionalityMarker
     {
+        public async Task Create_ProgramFile_ForConsole_ViaRazorComponents()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingRazorComponents.Create_ProgramFile_ForConsole<L0097.O001.CodeFileContext>(
+                    out _
+                )
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_ProgramFile_ForConsole_ViaRoslyn()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                context =>
+                {
+                    return Instances.CodeFileContextOperator.In_CodeFileContext(
+                        context.FilePath,
+                        out _,
+                        Instances.CodeFileContextOperationSetOperator.Generate_ProgramFile<L0073.T003.CodeFileContext>(
+                            context.NamespaceName)
+                    );
+                }
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_ProgramFile_ForConsole_ViaTextTemplating()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingTextTemplating.Create_ProgramFile_ForConsole<L0097.O001.CodeFileContext>(
+                    out _
+                )
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        /// <summary>
+        /// Creates the Visual Studio console application template default program file.
+        /// (Uses best practices for string interpolation-based code file generation.)
+        /// </summary>
+        public void Create_ProgramFile_ForConsole_ViaTextTemplating_Old()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            Instances.CodeFileGenerationOperations.Create_ProgramFile_ForConsole(
+                codeFilePath,
+                namespaceName);
+
+            Instances.NotepadPlusPlusOperator.Open(
+                codeFilePath.Value);
+        }
+
         public async Task Create_TailwindCssAllContentPathsJsonFile()
         {
             /// Inputs.
@@ -165,7 +251,49 @@ namespace R5T.S0070
                 jsonFilePath.Value);
         }
 
-        public async Task Create_DocumentationFile()
+        public async Task Create_DocumentationFile_ViaTextTemplating()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var projectDescription = Instances.Values.Sample_ProjectDescription;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingTextTemplating.Create_DocumentationFile<L0097.O001.CodeFileContext>(
+                    projectDescription.Value,
+                    out _)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_DocumentationFile_ViaRazorComponents()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var projectDescription = Instances.Values.Sample_ProjectDescription;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingRazorComponents.Create_DocumentationFile<L0097.O001.CodeFileContext>(
+                    projectDescription.Value,
+                    out _)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_DocumentationFile_ViaRazorComponents_Old()
         {
             /// Inputs.
             var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
@@ -183,7 +311,103 @@ namespace R5T.S0070
                 codeFilePath.Value);
         }
 
-        public void Create_InstancesFile()
+        public async Task Create_InstancesFile_ViaRoslyn()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileContextOperationSetOperator.Generate_InstancesFile<L0097.O001.CodeFileContext>()
+                //Instances.CodeFileContextOperations.In_CompilationFileContext<L0097.O001.CodeFileContext>(
+                //    out _,
+                //    Instances.CompilationUnitContextOperations.Set_CompilationUnit_ToNewEmpty,
+                //    Instances.CompilationUnitContextOperations.Add_UsingNamespace<L0073.T003.CompilationFileContext>(
+                //        Instances.NamespaceNames.System,
+                //        out _
+                //    ),
+                //    Instances.CompilationUnitContextOperations.In_NamespaceDeclarationContext<L0073.T003.CompilationFileContext>(
+                //        out _,
+                //        Instances.NamespaceDeclarationContextOperations.Set_NamespaceDeclaration_ToNewEmpty<L0073.T003.N001.NamespaceDeclarationContext>(
+                //            out _
+                //        ),
+                //        Instances.NamespaceDeclarationContextOperations.In_ClassDeclarationContext<L0073.T003.N001.NamespaceDeclarationContext>(
+                //            out _,
+                //            Instances.ClassDeclarationContextOperations.Set_ClassDeclaration_New<L0073.T003.ClassDeclarationContext>(
+                //                Instances.ClassNames._Strings.Instances,
+                //                out var classDeclarationSet
+                //            ),
+                //            Instances.ClassDeclarationContextOperations.Modify_Modifiers<L0073.T003.ClassDeclarationContext>(
+                //                classDeclarationSet,
+                //                _ =>
+                //                {
+                //                    var modifiersDescriptor = new ModifiersDescriptor
+                //                    {
+                //                        Accessibility = MemberAccessibilityLevel.Public,
+                //                        Is_Static = true,
+                //                    };
+
+                //                    var output = Instances.ModifiersOperator.Get_ModifiersTokenList(modifiersDescriptor);
+                //                    return output;
+                //                }
+                //            ),
+                //            Instances.ClassDeclarationContextOperations.Add_ClassDeclaration_ToNamespaceDeclaration
+                //        ),
+                //        Instances.NamespaceDeclarationContextOperations.Add_NamespaceDeclaration_ToCompilationUnit
+                //    ),
+                //    Instances.CompilationUnitContextOperations.Write_CompilationUnit_ToFilePath<L0073.T003.CompilationFileContext>(
+                //        out _
+                //    )
+                //)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_InstancesFile_ViaRazorComponents()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingRazorComponents.Create_InstancesFile<L0097.O001.CodeFileContext>(
+                    out _)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public async Task Create_InstancesFile_ViaTextTemplating()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out _,
+                Instances.CodeFileGenerationContextOperations._UsingTextTemplating.Create_InstancesFile<L0097.O001.CodeFileContext>(
+                    out _)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
+        public void Create_InstancesFile_ViaTextTemplating_Old()
         {
             /// Inputs.
             var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
@@ -289,26 +513,6 @@ namespace R5T.S0070
 
             /// Run.
             await Instances.CodeFileGenerationOperations.Create_ProgramFile_WebServerForBlazorClient(
-                codeFilePath,
-                namespaceName);
-
-            Instances.NotepadPlusPlusOperator.Open(
-                codeFilePath.Value);
-        }
-
-        /// <summary>
-        /// Creates the Visual Studio console application template default program file.
-        /// (Uses best practices for string interpolation-based code file generation.)
-        /// </summary>
-        public void Create_ProgramFile_ForConsole()
-        {
-            /// Inputs.
-            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
-            var namespaceName = Instances.Values.Sample_NamespaceName;
-
-
-            /// Run.
-            Instances.CodeFileGenerationOperations.Create_ProgramFile_ForConsole(
                 codeFilePath,
                 namespaceName);
 

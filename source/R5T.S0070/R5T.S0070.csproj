@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Version>1.0.0</Version>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>1587,1591</NoWarn>
@@ -17,5 +17,8 @@
     <ProjectReference Include="..\..\..\R5T.O0008\source\R5T.O0008\R5T.O0008.csproj" />
     <ProjectReference Include="..\..\..\R5T.Z0046\source\R5T.Z0046\R5T.Z0046.csproj" />
     <ProjectReference Include="..\..\..\R5T.F0033\source\R5T.F0033\R5T.F0033.csproj" />
+    <ProjectReference Include="..\..\..\R5T.L0097\source\R5T.L0097.O001\R5T.L0097.O001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.F0083\source\R5T.F0083.O001\R5T.F0083.O001.csproj" />
+    <ProjectReference Include="..\..\..\R5T.L0073\source\R5T.L0073\R5T.L0073.csproj" />
   </ItemGroup>
 </Project>

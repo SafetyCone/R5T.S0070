@@ -8,14 +8,22 @@ namespace R5T.S0070
     {
         static async Task Main()
         {
-            //CodeFileGenerationScripts.Instance.Create_ProgramFile_ForConsole();
+            //CodeFileGenerationScripts.Instance.Create_ProgramFile_ForConsole_ViaTextTemplating_Old();
+            //await CodeFileGenerationScripts.Instance.Create_ProgramFile_ForConsole_ViaTextTemplating();
+            //await CodeFileGenerationScripts.Instance.Create_ProgramFile_ForConsole_ViaRoslyn();
+            //await CodeFileGenerationScripts.Instance.Create_ProgramFile_ForConsole_ViaRazorComponents();
             //await CodeFileGenerationScripts.Instance.Create_ProgramFile_ForWebserverForBlazorClient();
             //CodeFileGenerationScripts.Instance.Create_ProjectPlanMarkdownFile();
             //CodeFileGenerationScripts.Instance.Create_AppSettingsJsonFile();
             //CodeFileGenerationScripts.Instance.Create_Development_AppSettingsJsonFile();
             //await CodeFileGenerationScripts.Instance.Create_LaunchSettingsJsonFile_WebServerForBlazorClient();
-            //CodeFileGenerationScripts.Instance.Create_InstancesFile();
-            //await CodeFileGenerationScripts.Instance.Create_DocumentationFile();
+            //CodeFileGenerationScripts.Instance.Create_InstancesFile_ViaTextTemplating_Old();
+            //await CodeFileGenerationScripts.Instance.Create_InstancsFile_ViaTextTemplating();
+            //await CodeFileGenerationScripts.Instance.Create_InstancesFile_ViaRazorComponents();
+            //await CodeFileGenerationScripts.Instance.Create_InstancesFile_ViaRoslyn();
+            //await CodeFileGenerationScripts.Instance.Create_DocumentationFile_ViaRazorComponents_Old();
+            //await CodeFileGenerationScripts.Instance.Create_DocumentationFile_ViaRazorComponents();
+            await CodeFileGenerationScripts.Instance.Create_DocumentationFile_ViaTextTemplating();
             //await CodeFileGenerationScripts.Instance.Create_PackageJsonFile();
             //await CodeFileGenerationScripts.Instance.Create_TailwindConfigJsFile();
             //await CodeFileGenerationScripts.Instance.Create_TailwindCssFile();
@@ -26,7 +34,7 @@ namespace R5T.S0070
             //await CodeFileGenerationScripts.Instance.Create_MainLayoutRazorFile_WebBlazorClient();
             //await CodeFileGenerationScripts.Instance.Create_IndexRazorFile_WebBlazorClient();
             //await CodeFileGenerationScripts.Instance.Create_TailwindCssContentPathsJsonFile();
-            await CodeFileGenerationScripts.Instance.Create_TailwindCssAllContentPathsJsonFile();
+            //await CodeFileGenerationScripts.Instance.Create_TailwindCssAllContentPathsJsonFile();
         }
     }
 }
