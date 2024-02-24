@@ -1,8 +1,12 @@
 using System;
 using System.Threading.Tasks;
+
 using R5T.L0073.F001;
+using R5T.L0093.T000;
+using R5T.L0096.T000;
 using R5T.T0132;
 using R5T.T0161.Extensions;
+using R5T.T0221;
 
 
 namespace R5T.S0070
@@ -251,6 +255,28 @@ namespace R5T.S0070
                 jsonFilePath.Value);
         }
 
+        public async Task Create_DocumentationFile_ViaRoslyn()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var projectDescription = Instances.Values.Sample_ProjectDescription;
+            var namespaceName = Instances.Values.Sample_NamespaceName;
+
+
+            /// Run.
+            await Instances.CodeFileContextOperator.In_CodeFileContext(
+                codeFilePath.Value,
+                namespaceName.Value,
+                out (IsSet<IHasFilePath> FilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) codeFilePropertiesSet,
+                Instances.CodeFileContextOperationSetOperator.Generate_DocumentationFile<L0097.O001.CodeFileContext>(
+                    codeFilePropertiesSet,
+                    out _,
+                    projectDescription.Value)
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
+        }
+
         public async Task Create_DocumentationFile_ViaTextTemplating()
         {
             /// Inputs.
@@ -322,8 +348,11 @@ namespace R5T.S0070
             await Instances.CodeFileContextOperator.In_CodeFileContext(
                 codeFilePath.Value,
                 namespaceName.Value,
-                out _,
-                Instances.CodeFileContextOperationSetOperator.Generate_InstancesFile<L0097.O001.CodeFileContext>()
+                out (IsSet<IHasFilePath> FilePathSet, IsSet<IHasNamespaceName> NamespaceNameSet) codeFilePropertiesSet,
+                Instances.CodeFileContextOperationSetOperator.Generate_InstancesFile<L0097.O001.CodeFileContext>(
+                    (codeFilePropertiesSet.FilePathSet, codeFilePropertiesSet.NamespaceNameSet),
+                    out _
+                )
                 //Instances.CodeFileContextOperations.In_CompilationFileContext<L0097.O001.CodeFileContext>(
                 //    out _,
                 //    Instances.CompilationUnitContextOperations.Set_CompilationUnit_ToNewEmpty,
@@ -467,7 +496,7 @@ namespace R5T.S0070
                 jsonFilePath.Value);
         }
 
-        public void Create_ProjectPlanMarkdownFile()
+        public void Create_ProjectPlanMarkdownFile_ViaTextTemplating_Old()
         {
             /// Inputs.
             var markdownFilePath = Instances.Paths.Sample_MarkdownFilePath;
@@ -483,6 +512,37 @@ namespace R5T.S0070
 
             Instances.NotepadPlusPlusOperator.Open(
                 markdownFilePath.Value);
+        }
+
+        public async Task Create_ProjectPlanMarkdownFile_ViaTextTemplating()
+        {
+            /// Inputs.
+            var codeFilePath = Instances.Paths.Sample_CSharpFilePath;
+            var projectName = Instances.Values.Sample_ProjectName;
+            var projectDescription = Instances.Values.Sample_ProjectDescription;
+
+
+            /// Run.
+            
+
+            await Instances.ContextOperator.In_Context(
+                new Context000
+                {
+                    FilePath = codeFilePath.Value,
+                    ProjectName = projectName.Value,
+                    ProjectDescription = projectDescription.Value
+                },
+                Instances.CodeFileGenerationContextOperations.Create_ProjectPlanFile<Context000>(
+                    (
+                    Instances.IsSetOperator.IsSet<IHasFilePath>(),
+                    Instances.IsSetOperator.IsSet<IHasProjectName>(),
+                    Instances.IsSetOperator.IsSet<IHasProjectDescription>()
+                    ),
+                    out _
+                )
+            );
+
+            Instances.NotepadPlusPlusOperator.Open(codeFilePath);
         }
 
         public async Task Create_ProgramFile_ForWebBlazorClient()
